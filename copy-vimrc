@@ -1,4 +1,8 @@
 " This is Marco Hemken's .vimrc
+" Reload changes with this command:
+" :so %
+" :so is short for source
+" % stands for current file
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -34,25 +38,25 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 
+
 set laststatus=2
-set statusline=
-set t_Co=256
 set nu
 set rnu
 set hlsearch
+set nowrap
 
 augroup myvimrchooks
 	au!
 	autocmd bufwritepost .vimrc source ~/.vimrc
-augroup END
+augroup end
 
 "split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <c-j> <c-w><c-j>
+nnoremap <c-k> <c-w><c-k>
+nnoremap <c-l> <c-w><c-l>
+nnoremap <c-h> <c-w><c-h>
 
-au BufNewFile,BufRead *.py
+au bufnewfile,bufread *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
@@ -62,36 +66,78 @@ au BufNewFile,BufRead *.py
     \ set fileformat=unix |
     \ set rnu |
 
-au BufNewFile,BufRead *.md
+au bufnewfile,bufread *.md
     \ set autoindent |
     \ set rnu |
+    \ set expandtab |
+    \ set shiftwidth=4 |
+    \ set softtabstop=4 |
+    \ set colorcolumn=80 |
+    \ hi colorcolumn ctermbg=darkgreen guibg=firebrick3 |
 
-au BufNewFile,BufRead *.html
+au bufnewfile,bufread *.html
     \ set shiftwidth=4 |
     \ set rnu |
 
-au BufNewFile,BufRead *.rs
+au bufnewfile,bufread *.sh
+    \ set shiftwidth=4 |
+    \ set rnu |
+
+au bufnewfile,bufread *.rs 
     \ set autoindent |
     \ set shiftwidth=4 |
     \ set rnu |
 
-"au BufNewFile,BufRead *.yml 
-autocmd FileType yaml 
+au bufnewfile,bufread *.c  
+    \ set autoindent |
+    \ set shiftwidth=4 |
+    \ set rnu |
+
+au bufnewfile,bufread *.js  
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+    \ set rnu |
+
+"au bufnewfile,bufread *.yml 
+autocmd filetype yaml 
     \ set autoindent |
     \ set rnu |
     \ setlocal ts=2 sts=2 sw=2 expandtab
 
-"define BadWhitespace before using in a match
-highlight BadWhitespace ctermbg=red guibg=darkred
+"define badwhitespace before using in a match
+highlight badwhitespace ctermbg=red guibg=darkred
 
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+au bufread,bufnewfile *.py,*.pyw,*.c,*.h match badwhitespace /\s\+$/
 
 set encoding=utf-8
 
 set splitbelow
 set splitright
 
+" remaps
 nnoremap ; :
 nnoremap : ;
-inoremap <Tab> <Esc>`^
+nnoremap 0 ^
+nnoremap ^ 0
+inoremap <tab> <esc>`^
+nnoremap co :noh<enter>
 
+" nice wrapping
+set wrap
+set linebreak
+set nolist " list diables linebreak
+
+"from a youtube video
+set path+=**    " search for files in subdirectories
+set wildmenu    " search for a file from substring
+let g:netrw_banner = 0    " edit: . to search current directory
+let g:netrw_liststyle = 3
+
+"snippets
+nnoremap \html :-1read ~/.vim/.skeleton.html<cr>2jfd
+nnoremap \python :-1read ~/.vim/.skeleton.python<CR>3jfp
+nnoremap \Dockerfile :-1read ~/.vim/.skeleton.Dockerfile<CR>
