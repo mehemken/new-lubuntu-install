@@ -1,28 +1,33 @@
-" This is Marco Hemken's .vimrc
+" Author:   Marco Hemken
+" email:    mehemken@gmail.com
+" github:   mehemken
+" web:      mehemken.io
 " Reload changes with this command:
 " :so %
 " :so is short for source
 " % stands for current file
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
+""""""""""""""""""""""""""""""""""""""""""
+" Vundle (uncomment if you need it)
+""""""""""""""""""""""""""""""""""""""""""
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'rust-lang/rust.vim'
-Plugin 'racer-rust/vim-racer'
-
-" other plugins:
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+" set rtp+=~/.vim/bundle/Vundle.vim
+"
+" call vundle#begin()
+" " alternatively, pass a path where Vundle should install plugins
+" "call vundle#begin('~/some/path/here')
+" 
+" " let Vundle manage Vundle, required
+" Plugin 'VundleVim/Vundle.vim'
+" Plugin 'rust-lang/rust.vim'
+" Plugin 'racer-rust/vim-racer'
+" 
+" " other plugins:
+" 
+" " All of your Plugins must be added before the following line
+" call vundle#end()            " required
+"
+" filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 " filetype plugin on
 "
@@ -36,8 +41,12 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+""""""""""""""""""""""""""""""""""""""""""
+" Vundle (end)
+""""""""""""""""""""""""""""""""""""""""""
 
-
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
 set laststatus=2
 set nu
@@ -74,6 +83,14 @@ au bufnewfile,bufread *.md
     \ set softtabstop=4 |
     \ set colorcolumn=80 |
     \ hi colorcolumn ctermbg=darkgreen guibg=firebrick3 |
+
+au bufnewfile,bufread *.conf
+    \ set autoindent |
+    \ set rnu |
+    \ set expandtab |
+    \ set shiftwidth=4 |
+    \ set softtabstop=4 |
+    \ set colorcolumn=80 |
 
 au bufnewfile,bufread *.html
     \ set shiftwidth=4 |
